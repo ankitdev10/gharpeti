@@ -12,10 +12,11 @@
 # next.js
 /.next/
 /out/
-
+.env
+*.env
+/backend/.env
 # production
 /build
-
 # misc
 .DS_Store
 *.pem
