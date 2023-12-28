@@ -76,6 +76,55 @@ func GetUser(c echo.Context) error {
 			"error": "Internal server error",
 		})
 	}
-
 	return c.JSON(http.StatusOK, users)
+}
+
+func GetOneUser(c echo.Context) error {
+	var user models.User
+	id := c.Param("id")
+	db := db.DB
+	result := db.First(&user, id)
+
+	if result.Error != nil {
+
+		if !errors.Is(result.Error, gorm.ErrRecordNotFound) {
+
+			return c.JSON(http.StatusInternalServerError, result.Error)
+		} else {
+			return c.JSON(http.StatusNotFound, map[string]string{
+				"error": "User not found",
+			})
+		}
+	}
+	user.Password = ""
+	return c.JSON(http.StatusOK, user)
+}
+
+func UpdateUser(c echo.Context) error {
+	id := c.Param("id")
+	db := db.DB
+	var existingUser models.User
+
+	findUser := db.Find(&existingUser, id)
+	if findUser.Error != nil {
+		if errors.Is(findUser.Error, gorm.ErrRecordNotFound) {
+			return c.JSON(http.StatusNotFound, "User not found")
+		}
+	}
+
+	updatedUser := existingUser
+
+	if err := c.Bind(&updatedUser); err != nil {
+		return c.JSON(http.StatusInternalServerError, map[string]interface{}{
+			"error": "Internal server error",
+		})
+	}
+
+	updateResult := db.Model(&existingUser).Updates(&updatedUser)
+	if updateResult.Error != nil {
+		return c.JSON(http.StatusInternalServerError, map[string]interface{}{
+			"error": "Internal server error",
+		})
+	}
+	return c.JSON(http.StatusOK, existingUser)
 }
