@@ -1,4 +1,5 @@
-import Hero from "@/components/Hero";
+import FeaturedProperties from "@/components/home/FeaturedProperties";
+import Hero from "@/components/home/Hero";
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
       >
         <Hero />
       </div>
+      <FeaturedProperties />
     </main>
   );
 }
