@@ -39,7 +39,7 @@ const Hero = () => {
 
       <div className="mt-4 text-black opacity-100 flex items-center space-x-10 bg-white p-6 rounded-sm shadow-lg">
         {SELECTOPTIONS.map((item, i) => (
-          <div>
+          <div key={i}>
             <h1 className="text-sm">{item.title}</h1>
             <Select key={i} onValueChange={(e) => console.log(e)}>
               <SelectTrigger className="w-[180px]">
