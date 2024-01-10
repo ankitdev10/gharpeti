@@ -7,6 +7,7 @@ const Card = () => {
       <img
         src="https://images.pexels.com/photos/271816/pexels-photo-271816.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
         alt=""
+        className="hover:scale-[1.01] transition-all ease-linear"
       />
 
       <div className="p-2">
@@ -18,6 +19,10 @@ const Card = () => {
           veritatis sit? Animi, ipsum! Consequuntur mollitia atque aperiam sit,
           natus vitae!
         </p>
+
+        <h1 className="my-2 font-bold text-bold text-blue-900">
+          Nrs 12,000 per month
+        </h1>
         <Button className="mt-2 bg-primary hover:bg-primaryHover">
           Learn More
         </Button>

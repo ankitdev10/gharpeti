@@ -18,15 +18,15 @@ const Navbar = () => {
     },
     {
       name: "Sign Up",
-      to: "/register",
+      to: "/user?q=signup",
     },
     {
       name: "Sign In",
-      to: "/login",
+      to: "/user?q=signin",
     },
   ];
   return (
-    <nav className="w-4/5 px-12 py-8 text-gray-300 flex items-center justify-between absolute z-10">
+    <nav className="w-4/5 px-12 py-8 text-black flex items-center justify-between absolute z-10">
       <img
         src={"assets/logos/logo-no-background.svg"}
         alt=""

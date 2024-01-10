@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @layer {
+  body {
+    scroll-behavior: smooth;
+    scroll-snap-type: mandatory;
+  }
   .container {
     width: 80%;
     margin: auto;

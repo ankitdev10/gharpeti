@@ -1,5 +1,6 @@
 import FeaturedProperties from "@/components/home/FeaturedProperties";
 import Hero from "@/components/home/Hero";
+import Promotion from "@/components/home/Promotion";
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
         <Hero />
       </div>
       <FeaturedProperties />
+      <Promotion />
     </main>
   );
 }
