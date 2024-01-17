@@ -1,8 +1,28 @@
 import FeaturedProperties from "@/components/home/FeaturedProperties";
 import Hero from "@/components/home/Hero";
 import Promotion from "@/components/home/Promotion";
+import axios from "axios";
 
-export default function Home() {
+const getUsers = async () => {
+  try {
+    const res = await axios.get("http://localhost:4000/users");
+    console.log({ res });
+    return res.data;
+  } catch (err) {
+    return err;
+  }
+};
+export default async function Home() {
+  const data = (await getUsers()) || null;
+
+  if (data.code === "ECONNREFUSED") {
+    return (
+      <h1 className="text-6xl grid place-items-center min-h-screen">
+        Server down
+      </h1>
+    );
+  }
+
   return (
     <main>
       <div

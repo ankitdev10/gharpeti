@@ -25,7 +25,7 @@ func CreateUser(c echo.Context) error {
 
 	// Check if the user already exists
 	var existingUser models.User
-	result := db.DB.Where("email = ? OR username = ?", u.Email, u.Username).First(&existingUser)
+	result := db.DB.Where("email = ?", u.Email).First(&existingUser)
 	if result.Error != nil {
 		if !errors.Is(result.Error, gorm.ErrRecordNotFound) {
 

@@ -45,12 +45,10 @@ func Login(c echo.Context) error {
 		}
 		return c.JSON(http.StatusInternalServerError, result.Error)
 	}
-	// compare password
 	if err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(creds.Password)); err != nil {
 		return c.JSON(http.StatusUnauthorized, "Wrong credentials")
 	}
 
-	// send token
 	token := jwt.New(jwt.SigningMethodHS256)
 	claims := token.Claims.(jwt.MapClaims)
 	claims["id"] = user.ID
