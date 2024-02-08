@@ -1,10 +1,7 @@
 import Login from "@/components/user/Login";
 import Register from "@/components/user/Register";
-import React from "react";
 
 const page = ({ params, searchParams }: any) => {
-  console.log(searchParams);
-
   const { q } = searchParams;
 
   return (

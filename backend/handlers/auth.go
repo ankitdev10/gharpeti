@@ -61,7 +61,7 @@ func Login(c echo.Context) error {
 		return c.JSON(http.StatusInternalServerError, "Failed to generate token")
 	}
 
-	c.Response().Header().Set(echo.HeaderAuthorization, "Bearer "+tokenStr)
+	c.Response().Header().Set(echo.HeaderAuthorization, tokenStr)
 
 	return c.JSON(200, user)
 }

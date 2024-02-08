@@ -7,7 +7,6 @@ import { axiosInstance } from "@/lib/axios";
 const getUsers = async () => {
   try {
     const res = await axiosInstance.get("/users", {});
-    console.log({ res });
     return res.data;
   } catch (err) {
     return err;

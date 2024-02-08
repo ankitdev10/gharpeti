@@ -1,6 +1,8 @@
 "use server";
 
+import { cookies } from "next/headers";
 import { axiosInstance } from "./axios";
+const cookieStore = cookies();
 
 export const login = async (user: {
   user: {
@@ -8,19 +10,23 @@ export const login = async (user: {
     password: string;
   };
 }) => {
+  console.log(user);
   try {
-    const res = await axiosInstance.post("/auth/login", user);
-    console.log(res.headers.getAuthorization);
-    console.log(res);
+    const res = await axiosInstance.post("/auth/login", {
+      email: user.user.email,
+      password: user.user.password,
+    });
     if (res.status === 200) {
-      // @ts-ignore
+      const token = await res.headers.authorization;
+      console.log({ token });
+      if (token) {
+        cookieStore.set("auth-token", token);
+      }
 
-      console.log(res?.headers?.get("Authorization"));
-      console.log(res.headers.authorization);
-
-      return res;
+      return res.data;
     }
   } catch (error: any) {
+    console.log(error);
     throw new Error((error as Error).message);
   }
 };
