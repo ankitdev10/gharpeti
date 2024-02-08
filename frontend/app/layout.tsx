@@ -1,5 +1,4 @@
 import Loader from "@/components/Loader";
-import Navbar from "@/components/Navbar";
 import type { Metadata } from "next";
 import { Inter, Lato } from "next/font/google";
 import { Toaster } from "react-hot-toast";
@@ -25,7 +24,6 @@ export default function RootLayout({
     <html lang="en">
       <body className={lato.className}>
         <Loader />
-        <Navbar />
         <Toaster position="top-right" toastOptions={{ duration: 3000 }} />
         {children}
       </body>
