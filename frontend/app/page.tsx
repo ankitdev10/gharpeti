@@ -1,11 +1,12 @@
+import ExploreProperties from "@/components/home/ExploreProperties";
 import FeaturedProperties from "@/components/home/FeaturedProperties";
 import Hero from "@/components/home/Hero";
 import Promotion from "@/components/home/Promotion";
-import axios from "axios";
+import { axiosInstance } from "@/lib/axios";
 
 const getUsers = async () => {
   try {
-    const res = await axios.get("http://localhost:4000/users");
+    const res = await axiosInstance.get("/users", {});
     console.log({ res });
     return res.data;
   } catch (err) {
@@ -35,6 +36,7 @@ export default async function Home() {
       </div>
       <FeaturedProperties />
       <Promotion />
+      <ExploreProperties />
     </main>
   );
 }

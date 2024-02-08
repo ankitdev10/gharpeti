@@ -1,4 +1,4 @@
-import React from "react";
+import Link from "next/link";
 import { Button } from "../ui/button";
 
 const Card = () => {
@@ -23,9 +23,11 @@ const Card = () => {
         <h1 className="my-2 font-bold text-bold text-blue-900">
           Nrs 12,000 per month
         </h1>
-        <Button className="mt-2 bg-primary hover:bg-primaryHover">
-          Learn More
-        </Button>
+        <Link href={"/properties/test"}>
+          <Button className="mt-2 bg-primary hover:bg-primaryHover">
+            Learn More
+          </Button>
+        </Link>
       </div>
 
       <h1 className="absolute top-2 left-2 text-sm px-5 py-1 bg-[#0492c2] text-white">
