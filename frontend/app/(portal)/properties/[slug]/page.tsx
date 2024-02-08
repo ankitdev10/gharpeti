@@ -2,7 +2,7 @@ import Card from "@/components/universal/Card";
 
 const page = () => {
   return (
-    <section className="p-24">
+    <section className="">
       <div className="flex space-x-12 p-12 items-center">
         <div className="flex-1">
           <img

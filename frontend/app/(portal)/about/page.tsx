@@ -1,6 +1,6 @@
 const RentalPage = () => {
   return (
-    <section id="rental__hero" className="py-24 overflow-hidden">
+    <section id="rental__hero" className=" overflow-hidden">
       <div id="rental__hero__wrapper" className="w-4/5 mx-auto nb:w-11/12">
         <div
           id="top_section"
