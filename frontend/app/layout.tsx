@@ -1,6 +1,7 @@
 import Loader from "@/components/Loader";
 import type { Metadata } from "next";
 import { Inter, Lato } from "next/font/google";
+import { Suspense } from "react";
 import { Toaster } from "react-hot-toast";
 import "./globals.css";
 
@@ -23,7 +24,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={lato.className}>
-        <Loader />
+        <Suspense>
+          <Loader />
+        </Suspense>
         <Toaster position="top-right" toastOptions={{ duration: 3000 }} />
         {children}
       </body>

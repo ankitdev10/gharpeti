@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import type { Metadata } from "next";
 import { Inter, Lato } from "next/font/google";
+import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 const lato = Lato({
@@ -13,17 +14,17 @@ export const metadata: Metadata = {
   description: "Find yourself a home",
 };
 
-export default function RootLayout({
+export default function PortalLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={lato.className}>
-        <Navbar />
-        <div className="py-24">{children}</div>
-      </body>
-    </html>
+    <>
+      <Navbar />
+      <div className="py-24">
+        <Suspense>{children}</Suspense>
+      </div>
+    </>
   );
 }

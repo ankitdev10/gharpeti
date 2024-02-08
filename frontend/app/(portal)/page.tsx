@@ -25,7 +25,7 @@ export default async function Home() {
   }
 
   return (
-    <main>
+    <>
       <div
         style={{
           backgroundImage: `url("/assets/hero3.jpg")`,
@@ -37,6 +37,6 @@ export default async function Home() {
       <FeaturedProperties />
       <Promotion />
       <ExploreProperties />
-    </main>
+    </>
   );
 }
