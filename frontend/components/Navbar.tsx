@@ -24,7 +24,7 @@ const Navbar = () => {
     },
   ];
   return (
-    <nav className="w-4/5 px-12 py-8 text-black flex items-center justify-between absolute z-10">
+    <nav className="w-full px-12 py-8 text-black flex items-center justify-around absolute z-10">
       <Link href={"/"}>
         <img
           src={"assets/logos/logo-no-background.svg"}

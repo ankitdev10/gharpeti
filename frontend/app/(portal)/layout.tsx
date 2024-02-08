@@ -22,7 +22,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={lato.className}>
         <Navbar />
-        <div className="py-0">{children}</div>
+        <div className="py-24">{children}</div>
       </body>
     </html>
   );
