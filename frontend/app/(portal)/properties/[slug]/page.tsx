@@ -12,7 +12,7 @@ const page = () => {
         </div>
         <div className="flex-1 bg-slate-100 p-4">
           <h1 className="text-center font-bold text-2xl">Vary Nice House</h1>
-          <p className="mt-2 opacity-80">
+          <p className="mt-2 opacity-80 line-clamp-3">
             Welcome to our cozy 2 BHK home, nestled in the heart of Kathmandu.
             This charming rental property offers a perfect blend of comfort and
             convenience. Located in a prime area, our home is ideal for those

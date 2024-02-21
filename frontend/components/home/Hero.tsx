@@ -1,14 +1,14 @@
 "use client";
-import React from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
   Select,
-  SelectTrigger,
-  SelectValue,
   SelectContent,
   SelectItem,
+  SelectTrigger,
+  SelectValue,
 } from "@/components/ui/select";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const SELECTOPTIONS = [
   {
@@ -62,7 +62,9 @@ const Hero = () => {
         </div>
 
         <div>
-          <Button className="bg-primary hover:bg-primaryHover">Search</Button>
+          <Link href={"/search/test"}>
+            <Button className="bg-primary hover:bg-primaryHover">Search</Button>
+          </Link>
         </div>
       </div>
     </div>

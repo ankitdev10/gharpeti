@@ -1,3 +1,4 @@
+import Footer from "@/components/Footer";
 import Loader from "@/components/Loader";
 import type { Metadata } from "next";
 import { Inter, Lato } from "next/font/google";
@@ -29,6 +30,8 @@ export default function RootLayout({
         </Suspense>
         <Toaster position="top-right" toastOptions={{ duration: 3000 }} />
         {children}
+
+        <Footer />
       </body>
     </html>
   );

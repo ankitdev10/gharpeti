@@ -55,7 +55,7 @@ const Login = () => {
         </Button>
 
         <h5 className="text-sm">
-          Don't have an account yet?{" "}
+          Don&apos;t have an account yet?{" "}
           <Link className="text-blue-600" href={"/user?q=signup"}>
             Register
           </Link>{" "}

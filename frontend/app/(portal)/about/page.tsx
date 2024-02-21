@@ -29,7 +29,7 @@ const RentalPage = () => {
               Whether you are a property owner looking to advertise your space
               or a seeker in search of the perfect home, Gharpeti is your go-to
               destination. We offer a diverse range of properties, from cozy
-              apartments to spacious houses, ensuring there's something for
+              apartments to spacious houses, ensuring theres something for
               everyone.
             </p>
           </div>
@@ -52,8 +52,8 @@ const RentalPage = () => {
               </li>
 
               <li>
-                <strong>User-Friendly Platform:</strong> Gharpeti's website is
-                designed to provide a seamless and user-friendly experience,
+                <strong>User-Friendly Platform:</strong> Gharpeti&apos;s website
+                is designed to provide a seamless and user-friendly experience,
                 making it easy for property owners to showcase their homes and
                 for seekers to find their next living space.
               </li>
@@ -72,15 +72,15 @@ const RentalPage = () => {
               </li>
 
               <li>
-                <strong>24/7 Customer Support:</strong> Gharpeti's dedicated
-                support team is available around the clock to assist you. We're
-                here to answer your queries, address concerns, and provide
-                guidance throughout your rental journey.
+                <strong>24/7 Customer Support:</strong> Gharpeti&apos;s
+                dedicated support team is available around the clock to assist
+                you. We&apos;re here to answer your queries, address concerns,
+                and provide guidance throughout your rental journey.
               </li>
 
               <p className="mt-4">
-                Gharpeti is not just a platform; it's a community where property
-                owners and seekers come together. Join us, explore the
+                Gharpeti is not just a platform; it&apos;s a community where
+                property owners and seekers come together. Join us, explore the
                 possibilities, and find your perfect rental match.
               </p>
             </ul>
