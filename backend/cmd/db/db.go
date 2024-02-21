@@ -44,15 +44,18 @@ func InitDB() {
 }
 
 func migrations() {
-
 	err := DB.AutoMigrate(&models.User{})
-
 	if err != nil {
 		fmt.Println(err)
 	}
 
-	e := DB.AutoMigrate(&models.Picture{})
-	if e != nil {
+	err = DB.AutoMigrate(&models.Picture{})
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	err = DB.AutoMigrate(&models.Property{})
+	if err != nil {
 		fmt.Println(err)
 	}
 }
