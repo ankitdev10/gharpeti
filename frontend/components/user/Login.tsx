@@ -3,7 +3,8 @@
 import { login } from "@/lib/api";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import { useState } from "react";
+import toast from "react-hot-toast";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 
@@ -11,16 +12,21 @@ const Login = () => {
   const [user, setUser] = useState({ email: "", password: "" });
   const [error, setError] = useState<null | string>();
   const router = useRouter();
-  const handleLogin = async (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
+    try {
+      const data = await login({ user });
+      toast.success("Login in sucessfull");
+      router.push("/");
+    } catch (error: any) {
+      console.log(error);
 
-    const data = await login({ user });
-
-    console.log(data);
+      toast.error(error.message as string);
+    }
   };
 
   return (
-    <form>
+    <form onSubmit={handleLogin}>
       <h1 className="text-4xl">It is great to see you again</h1>
       <div className="mt-8 flex flex-col space-y-5 items-center">
         <Input
@@ -47,10 +53,7 @@ const Login = () => {
             }))
           }
         />
-        <Button
-          className="bg-primary hover:bg-primaryHover"
-          onClick={handleLogin}
-        >
+        <Button type="submit" className="bg-primary hover:bg-primaryHover">
           Login
         </Button>
 

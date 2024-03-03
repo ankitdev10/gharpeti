@@ -1,10 +1,11 @@
 "use client";
 
+import axios from "axios";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import React, { FormEventHandler, useState } from "react";
+import { useState } from "react";
+import toast from "react-hot-toast";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
-import axios from "axios";
 type UserType = "customer" | "seller";
 
 const Register = () => {
@@ -17,7 +18,7 @@ const Register = () => {
 
   const FORM_FIELDS: Record<
     UserType,
-    { placeholder: string; type: string; name: string }[]
+    { placeholder: string; type: string; name: string; maxLength?: number }[]
   > = {
     customer: [
       {
@@ -39,6 +40,7 @@ const Register = () => {
         placeholder: "Phone number",
         type: "text",
         name: "contact",
+        maxLength: 10,
       },
       {
         placeholder: "Password",
@@ -66,6 +68,7 @@ const Register = () => {
         placeholder: "Phone number",
         type: "text",
         name: "contact",
+        maxLength: 10,
       },
       {
         placeholder: "Password",
@@ -76,6 +79,7 @@ const Register = () => {
         placeholder: "Location of the house",
         type: "text",
         name: "location",
+        maxLength: 255,
       },
     ],
   };
@@ -84,29 +88,36 @@ const Register = () => {
     params.set("type", value);
     router.push(pathname + `?${params.toString()}`);
     setType(value);
-    fetch("", {
-      headers: {},
-    });
   };
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
-    console.log({ name });
     setData((prev: any) => ({
       ...prev,
       [name]: value,
     }));
   };
 
-  console.log({ data });
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    const res = await axios.post("http://localhost:4000/users/create", {
-      ...data,
-      role: type,
-    });
-    console.log({ res });
-    if (res.status === 200 || 201) router.push("/user?q=signin");
+    try {
+      if (data.contact && !/^\d{10}$/.test(data.contact)) {
+        toast.error("Incorrect phone number");
+        return;
+      }
+      const res = await axios.post("http://localhost:4000/users/create", {
+        ...data,
+        role: type,
+      });
+      if (res.status === 200 || 201) {
+        router.push("/user?q=signin");
+        toast.success("Registration sucessfull");
+      } else {
+        toast.error(res.data.message);
+      }
+    } catch (err: any) {
+      toast.error(err.response.data.error);
+    }
   };
 
   return (
@@ -131,7 +142,11 @@ const Register = () => {
           </Button>
         </>
       ) : (
-        <form action="" className="flex flex-col items-center space-y-2">
+        <form
+          action=""
+          className="flex flex-col items-center space-y-2"
+          onSubmit={handleSubmit}
+        >
           {type === "customer" ? (
             <h1 className="text-4xl mb-4">Find yourself a home</h1>
           ) : (
@@ -144,13 +159,12 @@ const Register = () => {
               type={field.type}
               name={field.name}
               onChange={handleChange}
+              maxLength={field?.maxLength}
+              required
             />
           ))}
 
-          <Button
-            className=" bg-primary hover:bg-primaryHover w-4/5 py-3 text-lg h-auto"
-            onClick={handleSubmit}
-          >
+          <Button className=" bg-primary hover:bg-primaryHover w-4/5 py-3 text-lg h-auto">
             Register
           </Button>
         </form>

@@ -10,4 +10,5 @@ func PropertyRoutes(e *echo.Echo) {
 	e.POST("/property/create", handlers.CreateProperty)
 	e.GET("/property", handlers.GetProperties)
 	e.GET("/property/:id", handlers.GetProperty)
+	e.GET("/property/search", handlers.Search)
 }

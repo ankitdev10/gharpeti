@@ -16,11 +16,9 @@ axiosInstance.interceptors.request.use(
   (config) => {
     const cookieStore = cookies();
     const token = cookieStore.get("auth-token")?.value;
-
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     } else {
-      console.log("no token");
     }
 
     return config;

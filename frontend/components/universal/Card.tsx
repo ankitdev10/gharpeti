@@ -1,7 +1,16 @@
 import Link from "next/link";
 import { Button } from "../ui/button";
 
-const Card = () => {
+const Card = ({
+  item,
+}: {
+  item: {
+    title: string;
+    description: string;
+    price: number;
+    location: string;
+  };
+}) => {
   return (
     <article className="bg-white shadow-xl relative">
       <img
@@ -12,16 +21,12 @@ const Card = () => {
 
       <div className="p-2">
         <h1 className="text-lg capitalize font-semibold text-primary">
-          Flat for rent in Chabahil
+          {item.title}
         </h1>
-        <p className="text-gray-500">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore,
-          veritatis sit? Animi, ipsum! Consequuntur mollitia atque aperiam sit,
-          natus vitae!
-        </p>
+        <p className="text-gray-500">{item.description}</p>
 
         <h1 className="my-2 font-bold text-bold text-blue-900">
-          Nrs 12,000 per month
+          Nrs {item.price} per month
         </h1>
         <Link href={"/properties/test"}>
           <Button className="mt-2 bg-primary hover:bg-primaryHover">
@@ -34,7 +39,7 @@ const Card = () => {
         Flat
       </h1>
       <h1 className="absolute right-2 top-2 text-sm px-5 py-1 bg-[#00308F] text-white">
-        Chabahil
+        {item.location}
       </h1>
     </article>
   );

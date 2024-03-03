@@ -1,28 +1,19 @@
+import { cookies } from "next/headers";
 import Link from "next/link";
+import { Logout } from "./logout";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu";
 
 const Navbar = () => {
-  const LIST_ITEMS = [
-    {
-      name: "Home",
-      to: "/",
-    },
-    {
-      name: "About",
-      to: "/about",
-    },
-    {
-      name: "Properties",
-      to: "/properties",
-    },
-    {
-      name: "Sign up",
-      to: "/user?q=signup",
-    },
-    {
-      name: "Sign in",
-      to: "/user?q=signin",
-    },
-  ];
+  const cookieStore = cookies();
+  const token = cookieStore.get("auth-token")?.value;
+
   return (
     <nav className="w-full px-12 py-8 text-black flex items-center justify-around absolute z-10">
       <Link href={"/"}>
@@ -34,11 +25,37 @@ const Navbar = () => {
       </Link>
 
       <ul className="flex gap-4">
-        {LIST_ITEMS.map((item, key) => (
-          <li key={key}>
-            <Link href={item.to}>{item.name}</Link>
-          </li>
-        ))}
+        <li>
+          <Link href="/">Home</Link>
+        </li>
+        <li>
+          <Link href="/about">About</Link>
+        </li>
+
+        {token ? (
+          <DropdownMenu>
+            <DropdownMenuTrigger className="outline-none ring-0">
+              Profile
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>Profile</DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Logout />
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        ) : (
+          <>
+            <li>
+              <Link href="/user?q=signup">Sign up</Link>
+            </li>
+            <li>
+              <Link href="/user?q=signin">Sign in</Link>
+            </li>
+          </>
+        )}
       </ul>
     </nav>
   );

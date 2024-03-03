@@ -65,7 +65,15 @@ const page = () => {
 
           <div className="mt-8 grid grid-cols-3 gap-12">
             {Array.from({ length: 3 }, (_, i) => (
-              <Card key={i} />
+              <Card
+                item={{
+                  title: "Villa",
+                  description: "Villa",
+                  price: 10000,
+                  location: "Test",
+                }}
+                key={i}
+              />
             ))}
           </div>
         </div>
