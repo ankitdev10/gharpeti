@@ -1,6 +1,15 @@
-import { cookies } from "next/headers";
+import { activeCustomer } from "@/lib/api";
 import Link from "next/link";
 import { Logout } from "./logout";
+import { CreateProperty } from "./properties/create-property";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "./ui/dialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,10 +19,8 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 
-const Navbar = () => {
-  const cookieStore = cookies();
-  const token = cookieStore.get("auth-token")?.value;
-
+const Navbar = async () => {
+  const user = await activeCustomer();
   return (
     <nav className="w-full px-12 py-8 text-black flex items-center justify-around absolute z-10">
       <Link href={"/"}>
@@ -32,15 +39,33 @@ const Navbar = () => {
           <Link href="/about">About</Link>
         </li>
 
-        {token ? (
+        {user ? (
           <DropdownMenu>
             <DropdownMenuTrigger className="outline-none ring-0">
               Profile
             </DropdownMenuTrigger>
             <DropdownMenuContent>
               <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              {user?.role === "seller" && (
+                <DropdownMenuItem asChild>
+                  <Dialog>
+                    <DialogTrigger className="p-2">
+                      Add new property
+                    </DialogTrigger>
+                    <DialogContent>
+                      <DialogHeader>
+                        <DialogTitle>Fill in your property details</DialogTitle>
+                        <DialogDescription>
+                          <CreateProperty />
+                        </DialogDescription>
+                      </DialogHeader>
+                    </DialogContent>
+                  </Dialog>
+                </DropdownMenuItem>
+              )}
               <DropdownMenuSeparator />
               <DropdownMenuItem>Profile</DropdownMenuItem>
+
               <DropdownMenuItem asChild>
                 <Logout />
               </DropdownMenuItem>

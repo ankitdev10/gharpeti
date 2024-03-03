@@ -1,4 +1,7 @@
+import { Button } from "@/components/ui/button";
 import Card from "@/components/universal/Card";
+import { PhoneIcon } from "lucide-react";
+import Link from "next/link";
 
 const page = () => {
   return (
@@ -54,6 +57,12 @@ const page = () => {
               a sense of peace and security.
             </li>
           </ul>
+          <Link href={`https://wa.me/9840480328`} target="_blank">
+            <Button className="w-full  space-x-1 mt-4 bg-green-400 font-bold text-lg hover:bg-green-500">
+              <PhoneIcon size={20} />
+              <span>Connect on Whatsapp</span>
+            </Button>
+          </Link>
         </div>
       </div>
 

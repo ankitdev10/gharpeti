@@ -15,7 +15,6 @@ export const login = async (user: {
       email: user.user.email,
       password: user.user.password,
     });
-    console.log({ res });
     if (res.status === 200) {
       const token = await res.headers.authorization;
       if (token) {
@@ -28,8 +27,26 @@ export const login = async (user: {
   }
 };
 
+export const activeCustomer = async () => {
+  try {
+    const res = await axiosInstance.get("/activeUser");
+    return res.data;
+  } catch (error: any) {
+    console.log(error.response.data.error);
+  }
+};
+
+export const addProperty = async (data: any) => {
+  try {
+    console.log({ data });
+    const res = await axiosInstance.post("/property/create", data);
+    return res.data;
+  } catch (error: any) {
+    console.log(error.response.data.error);
+  }
+};
+
 export const logout = async () => {
   const cookieStore = cookies();
   const res = cookieStore.delete("auth-token");
-  console.log(res);
 };

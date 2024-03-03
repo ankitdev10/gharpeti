@@ -6,10 +6,13 @@ import (
 	"errors"
 	"fmt"
 	"net/http"
+	"os"
+	"strings"
 
 	"gharpeti/cmd/db"
 	"gharpeti/models"
 
+	"github.com/dgrijalva/jwt-go"
 	"github.com/labstack/echo/v4"
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"
@@ -127,4 +130,54 @@ func UpdateUser(c echo.Context) error {
 		})
 	}
 	return c.JSON(http.StatusOK, existingUser)
+}
+
+func ActiveUser(c echo.Context) error {
+	user := c.Get("user").(*jwt.Token)
+	claims := user.Claims.(jwt.MapClaims)
+
+	userIDFloat64, ok := claims["id"].(float64)
+	if !ok {
+		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "Failed to fetch active customer"})
+	}
+
+	userID := uint(userIDFloat64)
+
+	var activeCustomer models.User
+	result := db.DB.First(&activeCustomer, userID)
+
+	if result.Error != nil {
+		return c.JSON(http.StatusInternalServerError, map[string]string{"error": "Failed to fetch active customer"})
+	}
+
+	activeCustomer.Password = ""
+
+	return c.JSON(http.StatusOK, activeCustomer)
+}
+
+func ValidateToken(next echo.HandlerFunc) echo.HandlerFunc {
+	return func(c echo.Context) error {
+		authHeader := c.Request().Header.Get("Authorization")
+		if authHeader == "" {
+			return c.JSON(http.StatusUnauthorized, map[string]string{"error": "Missing token"})
+		}
+
+		if !strings.HasPrefix(authHeader, "Bearer ") {
+			return c.JSON(http.StatusUnauthorized, map[string]string{"error": "Invalid token format"})
+		}
+
+		token := strings.TrimPrefix(authHeader, "Bearer ")
+
+		jwtToken, err := jwt.Parse(token, func(token *jwt.Token) (interface{}, error) {
+			return []byte(os.Getenv("JWT_SECRET")), nil
+		})
+
+		if err != nil || !jwtToken.Valid {
+			return c.JSON(http.StatusUnauthorized, map[string]string{"error": "Invalid token"})
+		}
+
+		c.Set("user", jwtToken)
+
+		return next(c)
+	}
 }

@@ -13,4 +13,5 @@ func UserRoutes(e *echo.Echo) {
 	e.GET("/users/:id", handlers.GetOneUser)
 	e.PUT("/users/update/:id", handlers.UpdateUser)
 	e.POST("/auth/login", handlers.Login)
+	e.GET("/activeUser", handlers.ActiveUser, handlers.ValidateToken)
 }
